@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #     help_url  -> 'root_url/help'
 
   get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
 
   resources :users
 
