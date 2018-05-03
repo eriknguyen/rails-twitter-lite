@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # handle successful case
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user   #equivalent to `redirect_to user_url(@user)`
     else
