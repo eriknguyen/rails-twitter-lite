@@ -5,6 +5,15 @@ This is the sample application for
 Learn Web Development with Rails*](http://www.railstutorial.org/)
 by [Michael Hartl](http://www.michaelhartl.com/).
 
+## Advanced login
+#### 1. Plan for persistent sessions
+  1. Create random string of digits for use as a remember token
+  2. Place the token in the browser cookies with long expiration
+  3. Save the hash digest to db
+  4. Place an encrypted version of user id in browser cookies
+  5. When presented with a cookie containing user_id, find user in db => compare remember token cookie with associated hash digest from db
+
+
 ## License
 
 All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/)
