@@ -18,10 +18,11 @@ module SessionsHelper
       @current_user ||= User.find_by(id: session[:user_id])
       # the above is equivalent to
       # @current_user = @current_user || User.find_by(id: session[:user_id])
-    else
+    elsif (user_id = cookies.signed[:user_id])
+      # raise # raise error to check if this block is untested
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
-        login user
+        log_in user
         @current_user = user
       end
     end
