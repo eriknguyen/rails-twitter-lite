@@ -14,6 +14,12 @@ by [Michael Hartl](http://www.michaelhartl.com/).
   5. When presented with a cookie containing user_id, find user in db => compare remember token cookie with associated hash digest from db
 
 
+## TODO
+#### Chap 10:
+  1. Test for friendly forwarding only forward to the given URL the first time
+  2. Integration test for all layout links (10.3.1)
+
+
 ## License
 
 All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/)
