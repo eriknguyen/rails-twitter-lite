@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # create a virtual attribute which is not stored in the db
   attr_accessor :remember_token
 
+  # create association with micropost
+  has_many :microposts, dependent: :destroy
+
   # basic setup for User model
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
