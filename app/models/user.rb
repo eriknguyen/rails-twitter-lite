@@ -11,6 +11,11 @@ class User < ApplicationRecord
            dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
 
+  has_many :passive_relationships, class_name: "Relationship",
+           foreign_key: "followed_id",
+           dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
   # basic setup for User model
   before_save {self.email = email.downcase}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -27,7 +32,7 @@ class User < ApplicationRecord
     Micropost.where("user_id = ?", id)
   end
 
-  ### Methods
+  ### Class methods
   class << self
     # returns the hash digest of the given string.
     def digest(string)
@@ -56,6 +61,22 @@ class User < ApplicationRecord
   # forget a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # User relationship methods
+  # follow a user
+  def follow(other_user)
+    following << other_user
+  end
+
+  # unfollow a user
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # returns true if the current user is following the other user
+  def following?(other_user)
+    following.include?(other_user)
   end
 
 end
